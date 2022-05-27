@@ -1,0 +1,30 @@
+type Like {
+  _id: String
+  who: User
+  parentID: String
+  idWho: String
+  react: REACT
+}
+
+type Query {
+  getLikesByPostID(parentID: String!): [Like]
+}
+
+type Mutation {
+  doLike(likeInput: LikeInput!): Boolean
+  unLike(parentID: String!): Boolean
+}
+
+input LikeInput {
+  parentID: String!
+  react: REACT!
+}
+
+enum REACT {
+    LIKE
+    LOVE
+    HAHA
+    WOW
+    SAD
+    ANGRY
+}

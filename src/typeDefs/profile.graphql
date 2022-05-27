@@ -1,0 +1,16 @@
+
+type Mutation {
+	updateUserInfo(userInfo: UserInfoInput!): Boolean
+	imOnline: Boolean
+}
+
+type LastSeenData {
+	_id: String
+	oldLastSeen: Float
+	lastSeen: Float
+}
+
+
+type Subscription {
+	someOneJustOnline: LastSeenData
+}

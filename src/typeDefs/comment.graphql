@@ -1,0 +1,49 @@
+type Comment {
+	_id: String
+	who: User
+	userID: String
+	postID: String
+	text: String
+	time: Float
+	likes: [Like]
+	parentID: String
+}
+
+type Query {
+	getCommentsByPostID(postID: String!,parentID:String!, limit: Float, skip: Float): [Comment]
+	getCommentsByPostID1(postID: String!, limit: Float, skip: Float): [Comment]
+	getCommentsByParentID(parentID: String!, limit: Float, skip: Float): [Comment]
+	countCommentByPostID(postID: String!): Float
+}
+
+type Mutation {
+	postOneComment(commentInput: CommentInput!): Boolean
+	editOneComment(editInput: EditInput!): Boolean
+	deleteOneComment(_id: String!): Boolean
+	submitCommentStatus(input: TypingInput!): Boolean
+}
+
+type Subscription {
+	commentCreated(postID: String!): Comment
+	commentTyping(postID: String!): Typing
+}
+
+type Typing {
+	postID: String
+	status: Boolean
+}
+
+input TypingInput {
+	postID: String!
+	status: Boolean!
+}
+
+input CommentInput {
+	postID: String!
+	text: String!
+	parentID: String!
+}
+input EditInput {
+	_id: String!
+	text: String!
+}

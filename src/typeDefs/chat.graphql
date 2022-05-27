@@ -1,0 +1,59 @@
+type Chat {
+	_id: String
+	text: String
+	sendID: String
+	receiveID: String
+	secretString: String
+	reactions: [ChatReaction]
+	time: Float
+	seen: Boolean
+}
+
+type ChatReaction {
+	idWho: String
+	react: REACT
+}
+
+input ChatInput {
+	receiveID: String!
+	text: String!
+}
+
+input ReactChatInput {
+	chatID: String!
+	react: REACT!
+}
+
+input GetChatInput {
+	receiveID: String!
+	skip: Float!
+}
+
+type Query {
+	getChats(input: GetChatInput!): [Chat]
+	getMyUnReadMessages: [UnreadMessage]
+}
+
+type Mutation {
+	sendChat(input: ChatInput!): Boolean
+	reactToAChat(input: ReactChatInput!): Boolean
+	submitChatStatus(input: TypingChatInput!): Boolean
+	iReadMyChatWith(_id: String!): Boolean
+}
+
+input TypingChatInput {
+	receiveID: String!
+	status: Boolean!
+}
+
+type TypingChat {
+	sendID: String
+	receiveID: String
+	status: Boolean
+}
+
+type Subscription {
+	newChatSentToMe: Chat
+	newChatSentToConversation(receiveID: String!): Chat
+	chatTyping(receiveID: String!): TypingChat
+}

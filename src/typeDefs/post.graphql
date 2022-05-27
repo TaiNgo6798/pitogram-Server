@@ -1,0 +1,56 @@
+
+type Post {
+  _id: String
+  idWho: String
+  who: User
+  photo: Photo
+  description: String
+  likes: [Like]
+  time: Float
+  commentsCount: Float
+  tags: [String]
+  isBlock:Boolean
+}
+
+
+type Query {
+  posts(skip: Float!, limit: Float): [Post]
+  getOnePost(_id: String!): Post
+  getPostsByUserID(userID: String!, skip: Float!): [Post]
+  getImagesByUserID(userID: String!): [Post]
+  search(keywords: [String!], skip: Float, limit: Float): [Post]
+  countPostByMonths(months: [Int]): [PostByMonth]
+}
+
+type Mutation {
+  addPost(post: PostInput!): Post
+  deletePost(deleteInput: DeleteInput!): Boolean
+  updatePost( post: PostEditInput!): Boolean
+  blockAndUnblockCmt( post: PostEditBlockInput!): Boolean
+}
+
+type PostByMonth {
+  month: Int
+  count: Int
+}
+
+input DeleteInput {
+  postID: String!
+}
+
+input PostEditInput {
+    _id: ID!
+  description: String
+  tags: String
+}
+input PostEditBlockInput{
+  _id:ID!
+  isBlock:Boolean
+}
+input PostInput {
+  description: String
+  photo: PhotoInput!
+  tags: [String]
+}
+
+

@@ -1,0 +1,84 @@
+type User {
+	_id: String
+	email: String
+	password: String
+	firstName: String
+	lastName: String
+	avatar: String
+	coverPhoto: String
+	bio: String
+	relationship: String
+	dob: String
+	gender: String
+	phone: String
+	schools: [String]
+	companies: [String]
+	permissions: [PERMISSIONS]
+	lastSeen: Float
+	unReadFrom: [UnreadMessage]
+	followingPostIDs: [String]
+	interestList:[String]
+}
+
+type UnreadMessage {
+	sendID: String
+}
+
+enum PERMISSIONS {
+	ACCESS
+	POST
+	DELETE
+	EDIT
+	POSTCOMMENT
+	EDITCOMMENT
+	DELETECOMMENT
+	ADMIN
+}
+
+type Query {
+	users: [User]
+	getUserByID(_id: String): User
+}
+
+type Mutation {
+	createUser(user: UserInput): Boolean
+	login(loginInput: UserLoginInput): LoginRes
+	resetPassword(email: String!): Boolean
+	updateUser(_id:String!,interest:[String]!):Boolean
+	updateUserPermission(_id:String!, permiss:[String]!):Boolean
+}
+
+input UserInfoInput {
+	firstName: String
+	lastName: String
+	avatar: String
+	coverPhoto: String
+	bio: String
+	dob: String
+	gender: String
+	relationship: String
+	phone: String
+	schools: [String]
+	companies: [String]
+	interestList:[String]
+	permissions:[String]
+}
+
+input UserInput {
+	email: String!
+	password: String!
+	firstName: String!
+	lastName: String!
+	gender: String!
+}
+
+type LoginRes {
+	status: String
+	message: String
+	token: String
+}
+
+input UserLoginInput {
+	email: String
+	password: String
+}

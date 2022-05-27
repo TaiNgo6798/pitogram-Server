@@ -1,0 +1,25 @@
+type Report {
+     _id:String,
+    reporterID:String,
+    reporterName:String,
+    posterID:String,
+    posterName:String,
+    postID:String,
+    message:String,
+    reportCount:Float,
+    tags:[String],
+    createDate:Float
+}
+type Query{
+    reports:[Report]
+}
+type Mutation{
+    createReport(report:ReportInput):Boolean
+    deleteReport(_id:String!):Boolean
+}
+input ReportInput{
+    reporterID:String
+    postID:String
+    message:String
+}
+

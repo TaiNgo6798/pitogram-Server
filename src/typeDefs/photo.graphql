@@ -1,0 +1,47 @@
+
+type Photo {
+_id: String
+postID: String
+pathID: String
+
+height: Float
+width: Float
+focalLength: Float
+iso: Float
+
+artist: String
+copyright: String
+flash: String
+lensModel: String
+make: String
+model: String
+createDate: String
+
+}
+
+type Query {
+  getPhotoByPostID(postID: String!): Photo
+}
+
+type Mutation {
+  addPhoto(PhotoInput: PhotoInput!): Photo
+  deletePhotoByPostID(postID: String!, pathID: String!): Boolean
+}
+
+input PhotoInput {
+postID: String
+pathID: String
+
+height: Float
+width: Float
+focalLength: Float
+iso: Float
+
+artist: String
+copyright: String
+flash: String
+lensModel: String
+make: String
+model: String
+createDate: String
+}

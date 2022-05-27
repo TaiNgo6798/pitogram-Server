@@ -1,0 +1,12 @@
+type Tag {
+    _id:String,
+    tagName:String
+}
+type Query{
+    tags:[Tag]
+}
+type Mutation{
+    createTags(tags:[String!]):Boolean
+    deleteTag(_id:String!):Boolean
+}
+

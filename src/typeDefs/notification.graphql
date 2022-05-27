@@ -1,0 +1,36 @@
+type Notification {
+	_id: String
+	userID: String
+	postID: String
+	thumb: String
+	text: String
+	whoInteractive: String
+	timeStamp: Float
+	seen: Boolean
+}
+
+type Query {
+	getNotiByUserID(userID: String!): [Notification]
+	getAllNoti: [Notification]
+}
+
+type Mutation {
+	createNotification(notiInput: NotiInput!): Notification
+	deleteNotification(_id: String!): Boolean
+	deleteAllNotification: Boolean
+	iReadMyNoti(_id: String!): Boolean
+}
+
+type Subscription {
+	notiAdded: Notification
+}
+
+input NotiInput {
+	userID: String
+	postID: String
+	thumb: String
+	text: String
+	whoInteractive: String,
+	timeStamp: Float
+	seen: Boolean
+}
