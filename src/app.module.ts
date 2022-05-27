@@ -17,10 +17,6 @@ import * as Modules from './modules'
 		ScheduleModule.forRoot(),
 		GraphQLModule.forRootAsync({
 			useFactory: () => ({
-				cors: {
-					credentials: true,
-					origin: true
-				},
 				typePaths: ['./**/*.graphql'],
 				context: ({ req, connection }) => {
 					if (connection) {
